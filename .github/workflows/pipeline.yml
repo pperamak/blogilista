@@ -1,0 +1,42 @@
+name: Deployment pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  simple_deployment_pipeline:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Install frontend dependencies
+        working-directory: ./bloglist-frontend
+        run: npm install
+      - name: Install backend dependencies
+        run: npm install
+      - name: Check frontend style
+        working-directory: ./bloglist-frontend
+        run: npm run lint
+      - name: Check backend style
+        run: npm run lint
+      - name: Test frontend before building
+        working-directory: ./bloglist-frontend
+        run: npm test
+      - name: Build frontend
+        working-directory: ./bloglist-frontend
+        run: npm run build
+      - name: Copy frontend build to backend public/
+        run: |
+          rm -rf dist
+          mkdir -p dist
+          cp -r bloglist-frontend/dist/* dist/
+      - name: Test backend
+        run: npm test
+      - name: End-to-end tests
+        run: |
+          npx playwright install --with-deps
+          npm run test:e2e
