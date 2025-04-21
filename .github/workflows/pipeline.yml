@@ -43,6 +43,7 @@ jobs:
         env:
           TEST_MONGODB_URI: ${{ secrets.TEST_MONGODB_URI }}
           SECRET: ${{ secrets.SECRET }}
+          PORT: ${{ secrets.PORT }}
         run: |
           npx playwright install --with-deps
           npm run test:e2e
