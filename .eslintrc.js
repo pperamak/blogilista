@@ -5,6 +5,12 @@ module.exports = {
     es2021: true,
   },
   overrides: [
+    {
+      files: ['playwright.config.js'],
+      parserOptions: {
+        sourceType: 'module',
+      },
+    },
   ],
   parserOptions: {
     ecmaVersion: 'latest',
