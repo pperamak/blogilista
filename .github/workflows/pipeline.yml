@@ -35,6 +35,8 @@ jobs:
           mkdir -p dist
           cp -r bloglist-frontend/dist/* dist/
       - name: Test backend
+        env:
+          TEST_MONGODB_URI: ${{ secrets.TEST_MONGODB_URI }}
         run: npm test
       - name: End-to-end tests
         run: |

@@ -39,7 +39,8 @@
   "jest": {
     "testEnvironment": "node",
     "testPathIgnorePatterns": [
-      "/bloglist-frontend/"
+      "/bloglist-frontend/",
+      "/e2e/"
     ]
   }
 }
