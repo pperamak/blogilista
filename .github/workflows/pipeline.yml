@@ -40,6 +40,9 @@ jobs:
           SECRET: ${{ secrets.SECRET }}
         run: npm test
       - name: End-to-end tests
+        env:
+          TEST_MONGODB_URI: ${{ secrets.TEST_MONGODB_URI }}
+          SECRET: ${{ secrets.SECRET }}
         run: |
           npx playwright install --with-deps
           npm run test:e2e
