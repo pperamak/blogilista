@@ -36,6 +36,10 @@ if (process.env.NODE_ENV === 'test') {
   const testingRouter = require('./controllers/testing')
   app.use('/api/testing', testingRouter)
 }
+app.get('/version', (req, res) => {
+  res.send('2.1') // change this string to ensure a new version deployed
+})
+
 app.get('/health', (req, res) => {
   // eslint-disable-next-line no-constant-condition
   //if (true) throw('error...  ')
