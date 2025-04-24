@@ -13,27 +13,16 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
-      - name: Install frontend dependencies
-        working-directory: ./bloglist-frontend
-        run: npm install
-      - name: Install backend dependencies
-        run: npm install
+      - name: Build project
+        run: npm run build
       - name: Check frontend style
         working-directory: ./bloglist-frontend
         run: npm run lint
       - name: Check backend style
         run: npm run lint
-      - name: Test frontend before building
+      - name: Test frontend 
         working-directory: ./bloglist-frontend
         run: npm test
-      - name: Build frontend
-        working-directory: ./bloglist-frontend
-        run: npm run build
-      - name: Copy frontend build to backend public/
-        run: |
-          rm -rf dist
-          mkdir -p dist
-          cp -r bloglist-frontend/dist/* dist/
       - name: Test backend
         env:
           TEST_MONGODB_URI: ${{ secrets.TEST_MONGODB_URI }}
